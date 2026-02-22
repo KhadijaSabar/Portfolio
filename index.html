@@ -4,347 +4,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khadija Sabar - Ingénieure Full Stack & Mobile</title>
-    <meta name="description" content="Portfolio de Khadija Sabar, Ingénieure Full Stack et Mobile basée en Ontario, Canada">
-    
-    <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- React et ReactDOM via CDN -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    
-    <!-- Babel pour transformer JSX -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <style>
-        /* Animation personnalisée pour le bounce */
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(-25%);
-                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-            }
-            50% {
-                transform: translateY(0);
-                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-            }
-        }
-        .animate-bounce {
-            animation: bounce 1s infinite;
-        }
-    </style>
+    <meta name="description" content="Portfolio de Khadija Sabar, Ingénieure Full Stack et Mobile basée au Québec et Ontario, Canada">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
 </head>
 <body>
-    <div id="root"></div>
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">KS</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Accueil</a></li>
+                <li><a href="#about" class="nav-link">À propos</a></li>
+                <li><a href="#skills" class="nav-link">Compétences</a></li>
+                <li><a href="#projects" class="nav-link">Projets</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
 
-    <script type="text/babel">
-        const { useState, useEffect } = React;
-
-        // Composant Icon simple pour Lucide
-        const Icon = ({ name, className = "w-6 h-6" }) => {
-            useEffect(() => {
-                lucide.createIcons();
-            }, []);
-            return <i data-lucide={name} className={className}></i>;
-        };
-
-        const Portfolio = () => {
-            const [activeSection, setActiveSection] = useState('about');
-
-            useEffect(() => {
-                lucide.createIcons();
-            }, []);
-
-            // SECTION 1: DONNÉES PERSONNELLES
-            const personalInfo = {
-                name: "Khadija Sabar",
-                title: "Ingénieure Full Stack et Mobile",
-                description: "Ingénieure Full Stack passionnée et récemment diplômée, je combine expertise technique et créativité pour développer des solutions web et mobile innovantes. Résidente permanente au Canada et bilingue (français/anglais), je recherche une opportunité hybride ou à distance en Ontario, au Québec ou ailleurs au pays pour contribuer à des projets stimulants et faire évoluer ma carrière dans un environnement collaboratif.",
-                email: "ksabar179@gmail.com",
-                phone: "+1 613-360-2425",
-                github: "https://github.com/KhadijaSabar",
-                linkedin: "#", // À MODIFIER avec ton LinkedIn
-                location: "Ontario, Canada"
-            };
-
-            // SECTION 2: COMPÉTENCES TECHNIQUES
-            const skills = {
-                frontend: {
-                    title: "Frontend & Mobile",
-                    icon: "smartphone",
-                    techs: ["React", "Flutter", "HTML5", "CSS3", "JavaScript"]
-                },
-                backend: {
-                    title: "Backend & Langages",
-                    icon: "server",
-                    techs: ["Java", "Python", "C#", ".NET", "C++", "C", "PHP"]
-                },
-                architecture: {
-                    title: "Architecture & DevOps",
-                    icon: "globe",
-                    techs: ["Microservices", "Eureka (Netflix OSS)", "DevOps", "CI/CD"]
-                },
-                database: {
-                    title: "Base de données",
-                    icon: "database",
-                    techs: ["MySQL", "SQL", "Database Design"]
-                }
-            };
-
-            // SECTION 3: PROJETS - À PERSONNALISER
-            const projects = [
-                {
-                    title: "Projet à venir #1",
-                    description: "Description de ton premier projet - architecture, technologies utilisées, fonctionnalités principales",
-                    technologies: ["React", "Java", "MySQL"],
-                    link: "#"
-                },
-                {
-                    title: "Projet à venir #2",
-                    description: "Description de ton deuxième projet - problème résolu, solution technique, résultats",
-                    technologies: ["Flutter", "Python", "Microservices"],
-                    link: "#"
-                },
-                {
-                    title: "Projet à venir #3",
-                    description: "Description de ton troisième projet - contexte, défi technique, apprentissages",
-                    technologies: [".NET", "C#", "DevOps"],
-                    link: "#"
-                }
-            ];
-
-            const scrollToSection = (sectionId) => {
-                setActiveSection(sectionId);
-                document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-            };
-
-            return (
-                <div className="min-h-screen bg-gradient-to-br from-slate-800 via-blue-900 to-slate-800 text-white">
-                    
-                    {/* NAVIGATION BAR */}
-                    <nav className="fixed top-0 w-full bg-slate-800/90 backdrop-blur-md z-50 border-b border-cyan-500/20">
-                        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-                            <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                                KS
-                            </h1>
-                            <div className="flex gap-6">
-                                {['about', 'skills', 'projects', 'contact'].map((section) => (
-                                    <button
-                                        key={section}
-                                        onClick={() => scrollToSection(section)}
-                                        className={`capitalize hover:text-cyan-400 transition-colors ${
-                                            activeSection === section ? 'text-cyan-400' : 'text-gray-300'
-                                        }`}
-                                    >
-                                        {section === 'about' ? 'À propos' : 
-                                         section === 'skills' ? 'Compétences' : 
-                                         section === 'projects' ? 'Projets' : 'Contact'}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    </nav>
-
-                    {/* HERO SECTION */}
-                    <section className="pt-32 pb-20 px-6">
-                        <div className="max-w-6xl mx-auto text-center">
-                            <div className="mb-8">
-                                {/* PHOTO DE PROFIL - Remplace l'URL ci-dessous par le lien de ta photo */}
-                                <div className="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-cyan-400/50 shadow-2xl shadow-cyan-500/20">
-                                    {/* Option 1: Si tu as une URL d'image, décommente cette ligne et ajoute ton URL */}
-                                    {/* <img src="URL_DE_TA_PHOTO_ICI" alt="Khadija Sabar" className="w-full h-full object-cover" /> */}
-                                    
-                                    {/* Option 2: Avatar par défaut avec initiales (supprime cette div quand tu auras ta photo) */}
-                                    <div className="w-full h-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-4xl font-bold">
-                                        KS
-                                    </div>
-                                </div>
-                            </div>
-                            <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                                {personalInfo.name}
-                            </h1>
-                            <p className="text-2xl md:text-3xl text-cyan-300 mb-6">
-                                {personalInfo.title}
-                            </p>
-                            <p className="text-gray-400 mb-4">
-                                📍 {personalInfo.location} • 🇨🇦 Résidente Permanente • 🌐 Bilingue FR/EN
-                            </p>
-                            
-                            <div className="mt-12 animate-bounce">
-                                <Icon name="chevron-down" className="w-8 h-8 mx-auto text-cyan-400" />
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* ABOUT SECTION */}
-                    <section id="about" className="py-20 px-6 bg-slate-800/50">
-                        <div className="max-w-4xl mx-auto">
-                            <h2 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                                À propos de moi
-                            </h2>
-                            <div className="bg-slate-700/50 rounded-2xl p-8 border border-cyan-500/20 backdrop-blur-sm">
-                                <p className="text-lg text-gray-300 leading-relaxed">
-                                    {personalInfo.description}
-                                </p>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* SKILLS SECTION */}
-                    <section id="skills" className="py-20 px-6">
-                        <div className="max-w-6xl mx-auto">
-                            <h2 className="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                                Compétences Techniques
-                            </h2>
-                            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                {Object.values(skills).map((category, index) => (
-                                    <div 
-                                        key={index}
-                                        className="bg-slate-700/50 rounded-xl p-6 border border-cyan-500/20 hover:border-cyan-400/50 transition-all hover:transform hover:scale-105"
-                                    >
-                                        <div className="flex items-center gap-3 mb-4 text-cyan-400">
-                                            <Icon name={category.icon} className="w-6 h-6" />
-                                            <h3 className="text-xl font-semibold">{category.title}</h3>
-                                        </div>
-                                        <ul className="space-y-2">
-                                            {category.techs.map((tech, i) => (
-                                                <li key={i} className="text-gray-300 flex items-center gap-2">
-                                                    <span className="w-2 h-2 bg-cyan-400 rounded-full"></span>
-                                                    {tech}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* PROJECTS SECTION */}
-                    <section id="projects" className="py-20 px-6 bg-slate-800/50">
-                        <div className="max-w-6xl mx-auto">
-                            <h2 className="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                                Mes Projets
-                            </h2>
-                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {projects.map((project, index) => (
-                                    <div 
-                                        key={index}
-                                        className="bg-slate-700/50 rounded-xl p-6 border border-cyan-500/20 hover:border-cyan-400/50 transition-all hover:transform hover:scale-105"
-                                    >
-                                        <div className="mb-4">
-                                            <Icon name="code" className="w-8 h-8 text-cyan-400 mb-3" />
-                                            <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-                                            <p className="text-gray-400 text-sm mb-4">{project.description}</p>
-                                        </div>
-                                        <div className="flex flex-wrap gap-2 mb-4">
-                                            {project.technologies.map((tech, i) => (
-                                                <span 
-                                                    key={i}
-                                                    className="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs"
-                                                >
-                                                    {tech}
-                                                </span>
-                                            ))}
-                                        </div>
-                                        <a 
-                                            href={project.link}
-                                            className="text-cyan-400 hover:text-cyan-300 text-sm flex items-center gap-2"
-                                        >
-                                            Voir le projet →
-                                        </a>
-                                    </div>
-                                ))}
-                            </div>
-                            <p className="text-center text-gray-400 mt-8 italic">
-                                💡 Section à personnaliser avec tes projets réels
-                            </p>
-                        </div>
-                    </section>
-
-                    {/* CONTACT SECTION */}
-                    <section id="contact" className="py-20 px-6">
-                        <div className="max-w-4xl mx-auto text-center">
-                            <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                                Contactez-moi
-                            </h2>
-                            <p className="text-gray-300 mb-12 text-lg">
-                                Je suis disponible pour des opportunités hybrides ou à distance. N'hésitez pas à me contacter !
-                            </p>
-                            
-                            <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-                                {/* Email */}
-                                <a 
-                                    href={`mailto:${personalInfo.email}`}
-                                    className="bg-slate-700/50 rounded-xl p-6 border border-cyan-500/20 hover:border-cyan-400/50 transition-all hover:transform hover:scale-105 flex items-center gap-4"
-                                >
-                                    <Icon name="mail" className="w-8 h-8 text-cyan-400" />
-                                    <div className="text-left">
-                                        <p className="text-sm text-gray-400">Email</p>
-                                        <p className="text-white font-medium">{personalInfo.email}</p>
-                                    </div>
-                                </a>
-
-                                {/* Téléphone */}
-                                <a 
-                                    href={`tel:${personalInfo.phone}`}
-                                    className="bg-slate-700/50 rounded-xl p-6 border border-cyan-500/20 hover:border-cyan-400/50 transition-all hover:transform hover:scale-105 flex items-center gap-4"
-                                >
-                                    <Icon name="phone" className="w-8 h-8 text-cyan-400" />
-                                    <div className="text-left">
-                                        <p className="text-sm text-gray-400">Téléphone</p>
-                                        <p className="text-white font-medium">{personalInfo.phone}</p>
-                                    </div>
-                                </a>
-
-                                {/* GitHub */}
-                                <a 
-                                    href={personalInfo.github}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="bg-slate-700/50 rounded-xl p-6 border border-cyan-500/20 hover:border-cyan-400/50 transition-all hover:transform hover:scale-105 flex items-center gap-4"
-                                >
-                                    <Icon name="github" className="w-8 h-8 text-cyan-400" />
-                                    <div className="text-left">
-                                        <p className="text-sm text-gray-400">GitHub</p>
-                                        <p className="text-white font-medium">@KhadijaSabar</p>
-                                    </div>
-                                </a>
-
-                                {/* LinkedIn */}
-                                <a 
-                                    href={personalInfo.linkedin}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="bg-slate-700/50 rounded-xl p-6 border border-cyan-500/20 hover:border-cyan-400/50 transition-all hover:transform hover:scale-105 flex items-center gap-4"
-                                >
-                                    <Icon name="linkedin" className="w-8 h-8 text-cyan-400" />
-                                    <div className="text-left">
-                                        <p className="text-sm text-gray-400">LinkedIn</p>
-                                        <p className="text-white font-medium">Khadija Sabar</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* FOOTER */}
-                    <footer className="py-8 px-6 border-t border-cyan-500/20 bg-slate-800">
-                        <div className="max-w-6xl mx-auto text-center text-gray-400">
-                            <p>© 2025 Khadija Sabar • Développé avec React & Tailwind CSS</p>
-                            <p className="mt-2 text-sm">Ingénieure Full Stack & Mobile • Disponible pour opportunités</p>
-                        </div>
-                    </footer>
-
+    <section class="hero" id="home">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="greeting">Bonjour, je suis</span>
+                    <span class="name">Khadija Sabar</span>
+                </h1>
+                <p class="hero-subtitle">Ingénieure Full Stack & Mobile</p>
+                <p class="hero-description">
+                    Passionnée par le développement de solutions innovantes avec React, Flutter, et Java.
+                    Basée au Québec et Ontario, Canada. Prête à me déplacer selon l'opportunité.
+                    Je recherche des opportunités hybrides ou à distance.
+                </p>
+                <div class="hero-status">
+                    <span class="status-flag">
+                        <svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="1200" height="600" fill="#fff"/>
+                            <rect width="300" height="600" fill="#d52b1e"/>
+                            <rect x="900" width="300" height="600" fill="#d52b1e"/>
+                            <g transform="translate(600,300)">
+                                <path d="M0,-183 L28,-80 L56,-100 L40,-47 L90,-55 L70,-10 L100,15 L60,15 L65,45 L35,30 L0,90 L-35,30 L-65,45 L-60,15 L-100,15 L-70,-10 L-90,-55 L-40,-47 L-56,-100 L-28,-80 Z" fill="#d52b1e"/>
+                            </g>
+                        </svg>
+                    </span>
+                    <span class="status-text">Résidente Permanente • Québec et Ontario, Canada</span>
                 </div>
-            );
-        };
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">Voir mes projets</a>
+                    <a href="#contact" class="btn btn-secondary">Me contacter</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-placeholder">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="80" fill="url(#gradient)" />
+                        <defs>
+                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        // Rendu de l'application
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<Portfolio />);
-    </script>
+    <section class="about section" id="about">
+        <div class="container">
+            <h2 class="section-title">À propos de moi</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Ingénieure informatique récemment diplômée avec une solide expérience en développement 
+                        full-stack et mobile. Passionnée par la création de solutions techniques innovantes 
+                        et l'apprentissage continu.
+                    </p>
+                    <p>
+                        Actuellement en train de poursuivre un Master en Machine Learning et Deep Learning, 
+                        je cherche à combiner mes compétences en développement avec l'intelligence artificielle.
+                    </p>
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <span class="highlight-number">2+</span>
+                            <span class="highlight-label">Années d'expérience</span>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-number">10+</span>
+                            <span class="highlight-label">Technologies maîtrisées</span>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-number">3+</span>
+                            <span class="highlight-label">Projets complétés</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills section" id="skills">
+        <div class="container">
+            <h2 class="section-title">Compétences Techniques</h2>
+            <div class="skills-grid" id="skillsGrid"></div>
+        </div>
+    </section>
+
+    <section class="projects section" id="projects">
+        <div class="container">
+            <h2 class="section-title">Mes Projets</h2>
+            <div class="projects-grid" id="projectsGrid"></div>
+        </div>
+    </section>
+
+    <section class="contact section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contactez-moi</h2>
+            <p class="contact-subtitle">
+                Je suis disponible pour des opportunités hybrides ou à distance, et prête à me déplacer selon le poste. N'hésitez pas à me contacter!
+            </p>
+            <div class="contact-grid" id="contactGrid"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Khadija Sabar • Développé avec passion</p>
+            <p class="footer-sub">Ingénieure Full Stack & Mobile • Québec et Ontario, Canada</p>
+        </div>
+    </footer>
+
+    <script src="scripts/data.js"></script>
+    <script src="scripts/components.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>
