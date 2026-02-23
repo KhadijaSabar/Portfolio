@@ -112,6 +112,24 @@ body {
     width: 100%;
 }
 
+.lang-toggle {
+    padding: 0.4rem 0.8rem;
+    background: rgba(6, 182, 212, 0.15);
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition);
+    letter-spacing: 0.05em;
+}
+
+.lang-toggle:hover {
+    background: var(--primary);
+    color: white;
+}
+
 .nav-toggle {
     display: none;
     flex-direction: column;
@@ -207,17 +225,18 @@ body {
 }
 
 .status-flag {
-    font-size: 1.5rem;
     width: 32px;
     height: 20px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
-.status-flag svg {
+.status-flag img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
     border-radius: 3px;
 }
 
@@ -286,14 +305,6 @@ body {
 .image-placeholder svg {
     width: 100%;
     height: 100%;
-}
-
-.image-placeholder::before {
-    content: 'Ajouter photo ici';
-    position: absolute;
-    color: var(--text-muted);
-    font-size: 0.875rem;
-    opacity: 0.5;
 }
 
 .section {
@@ -437,6 +448,11 @@ body {
     }
 
     .hero-status {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-description {
         margin-left: auto;
         margin-right: auto;
     }

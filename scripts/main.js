@@ -1,10 +1,10 @@
 function initNavigation() {
-    const nav = document.getElementById('nav');
-    const navToggle = document.getElementById('navToggle');
-    const navMenu = document.getElementById('navMenu');
-    const navLinks = document.querySelectorAll('.nav-link');
+    var nav = document.getElementById('nav');
+    var navToggle = document.getElementById('navToggle');
+    var navMenu = document.getElementById('navMenu');
+    var navLinks = document.querySelectorAll('.nav-link');
 
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', function() {
         if (window.scrollY > 50) {
             nav.classList.add('scrolled');
         } else {
@@ -12,28 +12,28 @@ function initNavigation() {
         }
     });
 
-    navToggle.addEventListener('click', () => {
+    navToggle.addEventListener('click', function() {
         navMenu.classList.toggle('active');
     });
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
+    navLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
             navMenu.classList.remove('active');
         });
     });
 
-    window.addEventListener('scroll', () => {
-        let current = '';
-        const sections = document.querySelectorAll('.section, .hero');
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
+    window.addEventListener('scroll', function() {
+        var current = '';
+        var sections = document.querySelectorAll('.section, .hero');
+
+        sections.forEach(function(section) {
+            var sectionTop = section.offsetTop;
             if (window.scrollY >= (sectionTop - 200)) {
                 current = section.getAttribute('id');
             }
         });
 
-        navLinks.forEach(link => {
+        navLinks.forEach(function(link) {
             link.classList.remove('active');
             if (link.getAttribute('href').slice(1) === current) {
                 link.classList.add('active');
@@ -43,12 +43,12 @@ function initNavigation() {
 }
 
 function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            var target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                const offsetTop = target.offsetTop - 80;
+                var offsetTop = target.offsetTop - 80;
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
@@ -59,45 +59,52 @@ function initSmoothScroll() {
 }
 
 function initScrollAnimations() {
-    const observerOptions = {
+    var observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
             }
         });
     }, observerOptions);
 
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    document.querySelectorAll('.animate-on-scroll').forEach(function(el) {
         observer.observe(el);
     });
 }
 
-function initTypingEffect() {
-    const subtitle = document.querySelector('.hero-subtitle');
-    if (!subtitle) return;
-    
-    const text = subtitle.textContent;
-    subtitle.textContent = '';
-    let i = 0;
-    
-    function type() {
-        if (i < text.length) {
-            subtitle.textContent += text.charAt(i);
-            i++;
-            setTimeout(type, 100);
+function initLanguageToggle() {
+    var langBtn = document.getElementById('langToggle');
+    if (!langBtn) return;
+
+    langBtn.addEventListener('click', function() {
+        currentLang = currentLang === 'fr' ? 'en' : 'fr';
+        langBtn.textContent = currentLang === 'fr' ? 'EN' : 'FR';
+        document.documentElement.lang = currentLang;
+        updatePageLanguage();
+        initComponents();
+        setTimeout(function() {
+            initScrollAnimations();
+        }, 100);
+    });
+}
+
+function updatePageLanguage() {
+    var elements = document.querySelectorAll('[data-fr][data-en]');
+    elements.forEach(function(el) {
+        var text = currentLang === 'fr' ? el.getAttribute('data-fr') : el.getAttribute('data-en');
+        if (text) {
+            el.innerHTML = text;
         }
-    }
-    
-    setTimeout(type, 500);
+    });
 }
 
 function addComponentStyles() {
-    const styles = `
+    var styles = `
         .skill-card {
             background: var(--bg-card);
             border: 1px solid rgba(6, 182, 212, 0.2);
@@ -311,18 +318,19 @@ function addComponentStyles() {
         }
     `;
 
-    const styleSheet = document.createElement('style');
+    var styleSheet = document.createElement('style');
     styleSheet.textContent = styles;
     document.head.appendChild(styleSheet);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     addComponentStyles();
     initComponents();
     initNavigation();
     initSmoothScroll();
-    
-    setTimeout(() => {
+    initLanguageToggle();
+
+    setTimeout(function() {
         initScrollAnimations();
     }, 100);
 });
