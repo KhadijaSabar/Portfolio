@@ -54,7 +54,7 @@ const projects = [
     },
     {
         title: "Architecture Unifiée Django-Java",
-        description: "Intégration d'applications Django et Java Spring Boot via microservices pour infrastructure DevOps chez Atos.",
+        description: "Intégration d'applications Django et Java Spring Boot via microservices pour infrastructure DevOps.",
         technologies: ["Django", "Java", "Spring Boot", "Microservices"],
         github: null,
         demo: null,
