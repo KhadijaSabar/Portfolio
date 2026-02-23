@@ -289,7 +289,7 @@ body {
 }
 
 .image-placeholder::before {
-    content: 'Ajouter photo ici';
+    content: 'pic';
     position: absolute;
     color: var(--text-muted);
     font-size: 0.875rem;
