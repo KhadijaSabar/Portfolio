@@ -106,4 +106,7 @@ const contactMethods = [
     }
 ];
 
-let currentLang = 'fr';
+var urlParams = new URLSearchParams(window.location.search);
+var savedLang = urlParams.get('lang') || localStorage.getItem('portfolioLang') || 'fr';
+if (savedLang !== 'fr' && savedLang !== 'en') savedLang = 'fr';
+var currentLang = savedLang;

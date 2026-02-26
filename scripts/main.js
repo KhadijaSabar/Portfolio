@@ -81,10 +81,21 @@ function initLanguageToggle() {
     var langBtn = document.getElementById('langToggle');
     if (!langBtn) return;
 
+    langBtn.textContent = currentLang === 'fr' ? 'EN' : 'FR';
+    document.documentElement.lang = currentLang;
+    if (currentLang !== 'fr') {
+        updatePageLanguage();
+        initComponents();
+    }
+
     langBtn.addEventListener('click', function() {
         currentLang = currentLang === 'fr' ? 'en' : 'fr';
         langBtn.textContent = currentLang === 'fr' ? 'EN' : 'FR';
         document.documentElement.lang = currentLang;
+        localStorage.setItem('portfolioLang', currentLang);
+        var url = new URL(window.location);
+        url.searchParams.set('lang', currentLang);
+        window.history.replaceState({}, '', url);
         updatePageLanguage();
         initComponents();
         setTimeout(function() {
