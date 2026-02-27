@@ -44,31 +44,6 @@ Portfolio/
 
 **Responsive** — CSS Grid `auto-fit` + media queries. Menu hamburger sur mobile.
 
-## Personnalisation
-
-Modifier les projets dans `scripts/data.js` :
-```javascript
-{
-    title: "Mon Projet",
-    description: { fr: "...", en: "..." },
-    technologies: ["React", "Node.js"],
-    github: "https://github.com/...",
-    featured: true,
-    status: "completed"
-}
-```
-
-Changer les couleurs dans `styles/main.css` :
-```css
-:root {
-    --primary: #06b6d4;
-    --secondary: #3b82f6;
-}
-```
-
-## Déploiement
-
-Auto-deploy sur Vercel à chaque push sur `main`. HTML/CSS/JS statique, aucune config spéciale.
 
 ## Contact
 
